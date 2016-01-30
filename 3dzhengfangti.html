@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /*body{*/
+        /*perspective: 500px;!*深度看起来会有透视的感觉，进大远小*!*/
+        /*perspective-origin:right center;!*可以设置像素，最终透视点，可以看出你站在什么位置看*!*/
+        /*}*/
+        /*.parent{*/
+        /*margin:200px auto;*/
+        /*width:200px;*/
+        /*height:200px;*/
+        /*background:red;*/
+        /*transition:transform 2s ease;*/
+        /*transform-origin: top;*/
+        /*transform-style: preserve-3d;!*在父元素中设置*!*/
+
+
+
+
+        /*}*/
+        /*.parent:hover{*/
+        /*!*transform:translate3d(100px ,0 ,0) rotateX(45deg);*!*/
+
+        /*!*transform:;*!*/
+
+        /*!*transform:rotateY(45deg);*!*/
+        /*}*/
+        /*.son{*/
+        /*!*transform-origin: left;*!*/
+        /*width: 100px;height:100px;*/
+        /*background: blue;*/
+        /*margin: 50px;*/
+        /*transform:rotateX(45deg);*/
+        /*!*backface-visibility:hidden;!*让谁背面不可见给谁设置*!*!*/
+
+
+        /*}*/
+        .scene{
+            width: 200px;
+            height:200px;
+            padding: 200px;
+            /*border:1px solid red;*/
+            margin: 0 auto;
+            perspective: 800px;
+            transform-style: preserve-3d;
+            /*transition: transform 2s ease;*/
+
+            /*transform-origin:100px 100px;*/
+        }
+        /*.scene:hover{*/
+        /*transform: rotateY(270deg);*/
+
+        /*}*/
+        .box{
+            width: 200px;
+            height:200px;
+            /*background: red;*/
+            /*border:1px solid black;*/
+            position: relative;
+            left: 0px;top:0;
+            text-align: center;
+            line-height:200px ;
+            font-size: 3em;
+            transform-style: preserve-3d;
+            /*transform: translateZ(100px);*/
+            /*transition: transform 2s ease;*/
+            transform-origin: center center 100px;
+        }
+        /*.box:hover{*/
+        /*transform: rotate3d(1,1,0,270deg);*/
+        /*}*/
+        .box div{
+            width: 100%;
+            height:100%;
+            position: absolute;
+            left: 0;
+            top:0;
+
+        }
+        .box div:nth-child(1){
+            background: url(zimg/388011.jpg) no-repeat center ;
+            background-size: auto 100%;
+            transform: rotateX(90deg);
+            transform-origin: top;
+        }
+        .box div:nth-child(2){
+            background: url(zimg/869334.jpg) no-repeat center ;
+            background-size: auto 100%;
+            transform: rotateY(-90deg);
+            transform-origin: left;
+        }
+        .box div:nth-child(3){
+            background: url(zimg/869337.jpg) no-repeat center  ;
+            background-size: auto 100%;
+            transform: rotateY(180deg);
+            /*transform-origin: bottom;*/
+        }
+        .box div:nth-child(4){
+            background: url(zimg/1078144.jpg) no-repeat center  ;
+            background-size: auto 100%;
+            transform: rotateY(90deg);
+            transform-origin: right;
+        }
+        .box div:nth-child(5){
+            background: url(zimg/358286.jpg) no-repeat center  ;
+            background-size: auto 100%;
+            transform: rotateX(-90deg);
+            transform-origin: bottom;
+        }
+        .box div:nth-child(6){
+            background: url(zimg/613162.jpg) no-repeat center  ;
+            background-size: auto 100%;
+            transform: translateZ(200px);
+            /*transform-origin: top;*/
+        }
+    </style>
+    <script src="js/jquery.min1.10.2.js"></script>
+    <script>
+        $(function(){
+//            alert(1);
+            var cx=$('.box').offset().left+$('.box').width()/2;
+            var cy=$('.box').offset().top+$('.box').height()/2;
+            console.log(cx,cy);
+            $('.scene').mousemove(function(e){
+//                alert(1)
+                var px= e.pageX-cx;
+                var py= e.pageY-cy;
+                var pz=0;
+                var m=Math.sqrt(px*px+py*py+pz*pz);
+                var mx=px/m;
+                var my=py/m;
+                var mz=pz/m;
+                $('.box').css({transform:'rotate3d('+mx+','+my+','+mz+','+m+'deg)'});
+            });
+        });
+        //        window.onload=function(){
+        //            var box=document.getElementsByClassName('box')[0];
+        ////            setInterval(function(){
+        ////                alert(1);
+        //                box.style.transform='rotate3d(1,1,0,250deg)' ;
+        //            setTimeout(function(){
+        //                box.addEventListener('webkitTransitionEnd',function(){
+        //                    box.style.transform='rotate3d(1,1,0,-250deg)' ;
+        //                    setTimeout(function(){
+        //                        box.style.transform='rotate3d(1,1,0,250deg)' ;
+        //
+        //                    },2000)
+        //                },false);
+        //
+        //
+        //            },2000)
+        //
+        //
+        ////            },1000)
+        //
+        //        }
+
+        //    window.onload=function(){
+        //        var parent=document.getElementsByClassName('parent')[0];
+        ////        document.onclick=function(){
+        //            parent.style.transform='translate3d(100px ,0 ,0) rotateX(45deg)';
+        //        parent.addEventListener('webkitTransitionEnd',function(){
+        //
+        //        },false);
+        //
+        ////        }
+        //    }
+    </script>
+</head>
+<body>
+<div class="scene">
+    <!--<div class="ss"></div>-->
+    <div class="box">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+    </div>
+</div>
+<!--<div class="parent">-->
+<!--<div class="son"></div>-->
+<!--</div>-->
+</body>
+</html>
